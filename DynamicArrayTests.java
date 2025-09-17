@@ -88,6 +88,14 @@ public class DynamicArrayTests {
         compareToString(a1, "zabcdef");
     }
 
+    /**
+     * Tests that the adding an item to an index that 
+     * isn't accessible throws the corresponding error
+     */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testAddBounds() {
+        a1.add(6,'z');
+    }
     // ~*~*~*~*~ Append Tests Below ~*~*~*~*~
 
     /**

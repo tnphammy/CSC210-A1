@@ -191,24 +191,26 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         // Case 1: There is space to store the new item
         if (this.size() < this.length) {
             this.set(high + 1, item); // Put the item next to the current highest index
-            high++; // Update highest index
+            this.high++; // Update highest index
         }
         // Case 2: There is NOT ENOUGH space to store the new item
         else {
+
             // Create an array with larger size
-            DynamicArray<T> newDA = new DynamicArray<T>(this.length + 1);
-            newDA.high = this.high;
+            T[] tempArr = allocate(this.length + 1);
 
             // Copy all elements from current `DynamicArray`
             for (int i = this.low; i <= this.high; i++) {
-                newDA.set(i, this.get(i));
+                tempArr[i] = this.get(i);
             }
             // Set final element to item
-            newDA.set(newDA.high + 1, item);
+            tempArr[this.length] = item;
 
-            // Update current Dynamic Array to be newDA
-            this.update(newDA);
-            high++; // Update highest index
+            // Update the current storage to be tempArr
+            this.storage = tempArr;
+            this.length++; // Update length
+            this.high++; // Update highest index
+            
         }
     }
 
@@ -238,29 +240,27 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             // Case 2: There is not enough space
             else {
                 // Create an array with larger size
-                DynamicArray<T> newDA = new DynamicArray<T>(this.length + 1);
+                T[] tempArr = allocate(this.length + 1);
 
                 // Copy all previous elements from current `DynamicArray`
                 for (int i = 0; i < index; i++) {
-                    newDA.set(i, this.get(i));
+                    tempArr[i] = this.get(i);
                 }
 
                 // Set item at index
-                newDA.set(index, item);
+                tempArr[index] = item;
 
                 // Copy all subsequent elements from current `DynamicArray`
                 for (int i = index; i <= this.high; i++) {
-                    newDA.set(i + 1, this.get(i));
+                    tempArr[i + 1] = this.get(i);
                 }
 
-                // Update current Dynamic Array to be newDA
-                this.update(newDA);
-                high++; // Update highest index
+                // Update the current storage to be tempArr
+                this.storage = tempArr;
+                this.length++; // Update length
+                this.high++; // Update highest index
             }
         } else {
-            System.out.println(this);
-            System.out.println("Current index: " + index);
-            System.out.println("indexInRange(index) == " + indexInRange(index));
             throw new IndexOutOfBoundsException(indexErrorMessage);
         }
     }
