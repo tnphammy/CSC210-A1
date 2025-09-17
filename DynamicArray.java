@@ -210,7 +210,6 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             this.storage = tempArr;
             this.length++; // Update length
             this.high++; // Update highest index
-            
         }
     }
 
@@ -280,18 +279,20 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         if (indexInRange(index)) {
             // 0. Get removedItem before removal
             T removedItem = this.get(index);
-            // 1. Create a newDA with smaller size
-            DynamicArray<T> newDA = new DynamicArray<>(this.length - 1);
+            // 1. Create a tempArr with smaller size
+            T[] tempArr = allocate(this.length - 1);
             // 2. Copy all elements before the index
             for (int i = this.low; i < index; i++) {
-                newDA.set(i, this.get(i));
+                tempArr[i] = this.get(i);
             }
             // 3. Copy all elements after the index
             for (int i = index; i < this.high; i++) {
-                newDA.set(i, this.get(i + 1));
+                tempArr[i] = this.get(i + 1);
             }
-            // 4. Point current `DynamicArray` to newDA
-            this.update(newDA);
+            // 4. Update the current storage to be tempArr
+            this.storage = tempArr;
+            this.length--; // Update length
+            this.high--; // Update highest index
             // 5. Return removed element
             return removedItem;
         } else {
