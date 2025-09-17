@@ -1,10 +1,14 @@
+/**
+ * This Class is based on Java's built-in Array,
+ * adds functionality to it, similar to that of Java ArrayLists
+ */
 public class DynamicArray<T> implements DynamicArrayADT<T> {
     /* ATTRIBUTES */
-    public int length;
-    protected T[] storage;
-    public int low; // lowest index
-    public int high; // highest index
-    protected String indexErrorMessage = "Invalid index.";
+    int length;
+    T[] storage;
+    int low; // lowest index
+    int high; // highest index
+    String indexErrorMessage = "Invalid index.";
 
     /* CONSTRUCTORS */
     /**
@@ -92,7 +96,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
     /**
      * Checks to see if an index is accessible within a Dynamic Array
      * 
-     * @param index
+     * @param index The specified index
      * @return True/False - If the index is within the Dynamic Array
      */
     public boolean indexInRange(int index) {
@@ -173,7 +177,6 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * Adds an item to the end of the Dynamic Array
      * 
      * @param item The new item to be added
-     * @return True/False depending on operation success
      */
     public void add(T item) {
         // Case 1: There is space to store the new item
@@ -356,7 +359,8 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @throws IllegalArgumentException  if starting index is larger than ending
      *                                   index
      */
-    public DynamicArray<T> sublist(int fromIndex, int toIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
+    public DynamicArray<T> sublist(int fromIndex, int toIndex)
+            throws IndexOutOfBoundsException, IllegalArgumentException {
         // Check index validity
         if (fromIndex > toIndex) {
             throw new IllegalArgumentException("Invalid start and end indeces.");
@@ -415,7 +419,8 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @throws IllegalArgumentException  if the starting index is larger than the
      *                                   ending index
      */
-    public DynamicArray<T> extract(int fromIndex, int toIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
+    public DynamicArray<T> extract(int fromIndex, int toIndex)
+            throws IndexOutOfBoundsException, IllegalArgumentException {
         // Check index validity
         if (fromIndex > toIndex) {
             throw new IllegalArgumentException("Invalid start and end indeces.");
