@@ -40,7 +40,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      */
     public DynamicArray(DynamicArray<T> original, int newStart, int newEnd) {
         this.storage = original.storage;
-        this.length = newEnd - newStart + 1;
+        this.length = original.length;
         this.low = newStart;
         this.high = newEnd;
     }
@@ -99,21 +99,9 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         if (this.low <= index && index < this.length) {
             return true;
         } else {
+            System.out.println("low: " + this.low + ", index: " + index + ", length: " + this.length);
             return false;
         }
-    }
-
-    /**
-     * Update the current `DynamicArray` to share attributes of a `model`
-     * DynamicArray
-     * 
-     * @param model The model to "copy" attributes
-     */
-    public void update(DynamicArray<T> model) {
-        this.length = model.length;
-        this.storage = model.storage;
-        this.low = model.low;
-        this.high = model.high;
     }
 
     /**
@@ -368,8 +356,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @throws IllegalArgumentException  if starting index is larger than ending
      *                                   index
      */
-    public DynamicArray<T> sublist(int fromIndex, int toIndex)
-            throws IndexOutOfBoundsException, IllegalArgumentException {
+    public DynamicArray<T> sublist(int fromIndex, int toIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
         // Check index validity
         if (fromIndex > toIndex) {
             throw new IllegalArgumentException("Invalid start and end indeces.");
@@ -428,8 +415,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @throws IllegalArgumentException  if the starting index is larger than the
      *                                   ending index
      */
-    public DynamicArray<T> extract(int fromIndex, int toIndex)
-            throws IndexOutOfBoundsException, IllegalArgumentException {
+    public DynamicArray<T> extract(int fromIndex, int toIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
         // Check index validity
         if (fromIndex > toIndex) {
             throw new IllegalArgumentException("Invalid start and end indeces.");
@@ -438,7 +424,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             // 1. Make deep copy called newDA of original DA
             DynamicArray<T> newDA = new DynamicArray<>(this);
             // 2. Make sublist of newDA
-            DynamicArray<T> subArray = newDA.sublist(fromIndex, toIndex);
+            DynamicArray<T> subArray = new DynamicArray<>(this, fromIndex, toIndex - 1);
             // 3. Assign newDA to sublist
             newDA = subArray;
             System.out.println(subArray);

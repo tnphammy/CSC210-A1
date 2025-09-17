@@ -7,10 +7,8 @@ public class DynamicArrayTest {
         a1.add(3, 'd');
         a1.add(4, 'e');
         a1.add(5, 'f');
-        a1.add('g');
         System.out.println(a1);
-        a1.remove(6);
-        System.out.println(a1);
+        a1.extract(0, 1);
         // DynamicArray<Character> empty = new DynamicArray<Character>(0);
         // empty.get(0);
 

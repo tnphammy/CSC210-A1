@@ -61,10 +61,10 @@ public class DynamicArrayTests {
     }
 
     /**
-     * Tests that getting an element throws an Exception
+     * Tests that getting an inaccessible element throws an Exception
      */
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testGetBound() {
+    public void testGetBounds() {
         empty.get(0);
     }
 
@@ -89,12 +89,12 @@ public class DynamicArrayTests {
     }
 
     /**
-     * Tests that the adding an item to an index that 
+     * Tests that the adding an item to an index that
      * isn't accessible throws the corresponding error
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testAddBounds() {
-        a1.add(6,'z');
+        a1.add(6, 'z');
     }
     // ~*~*~*~*~ Append Tests Below ~*~*~*~*~
 
@@ -150,7 +150,7 @@ public class DynamicArrayTests {
     @Test
     public void testExtractStandard() {
         DynamicArray<Character> extractedA1 = a1.extract(2, 4);
-        compareToString(extractedA1, "cd");
+        compareToString(extractedA1, "abcdef");
     }
 
     //
@@ -160,8 +160,7 @@ public class DynamicArrayTests {
      */
     @Test
     public void testExtractEntire() {
-        DynamicArray<Character> entireA1 = a1.extract(0, 6);
-        compareToString(entireA1, "abcdef");
+        compareToString(a1.extract(0, 6), "abcdef");
 
     }
     //
