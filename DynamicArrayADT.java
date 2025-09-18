@@ -83,6 +83,22 @@ public interface DynamicArrayADT<T> {
     public DynamicArray<T> sublist(int fromIndex, int toIndex) throws IndexOutOfBoundsException, IllegalArgumentException;
 
     /**
+     * Returns the elements before a specified index as a new `DynamicArray`.
+     * @param toIndex The ending index (Exclusive)
+     * @return A copy containing the items of the `DynamicArray` within the range
+     * @throws IndexOutOfBoundsException for invalid indices
+     */
+    public DynamicArray<T> splitPrefix(int toIndex) throws IndexOutOfBoundsException;
+
+    /**
+     * Returns the elements from a specified index and after as a new `DynamicArray`.
+     * @param fromIndex The starting index (Inclusive)
+     * @return A copy containing the items of the `DynamicArray` within the range
+     * @throws IndexOutOfBoundsException for invalid indices
+     */
+    public DynamicArray<T> splitSuffix(int fromIndex) throws IndexOutOfBoundsException;
+
+    /**
      * Deletes items at a specified range in current `DynamicArray`
      * @param fromIndex The starting index (Inclusive)
      * @param toIndex The ending index (Exclusive)

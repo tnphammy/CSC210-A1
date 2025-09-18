@@ -1,3 +1,5 @@
+import static org.junit.Assert.fail;
+
 /**
  * This Class is based on Java's built-in Array,
  * adds functionality to it, similar to that of Java ArrayLists
@@ -384,6 +386,42 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             }
             return subArray;
         } else {
+            throw new IndexOutOfBoundsException(indexErrorMessage);
+        }
+    }
+
+    /**
+     * Returns the elements before a specified index as a new `DynamicArray`.
+     * @param toIndex The ending index (Exclusive)
+     * @return A copy containing the items of the `DynamicArray` within the range
+     * @throws IndexOutOfBoundsException for invalid indices
+     */
+    public DynamicArray<T> splitPrefix(int toIndex) throws IndexOutOfBoundsException {
+        // Check index validity
+        if (indexInRange(toIndex)) {
+            // Calls sublist()
+            DynamicArray<T> newDA = this.sublist(0, toIndex);
+            return newDA;
+        }
+        else {
+            throw new IndexOutOfBoundsException(indexErrorMessage);
+        }
+    }
+
+    /**
+     * Returns the elements from a specified index and after as a new `DynamicArray`.
+     * @param fromIndex The starting index (Inclusive)
+     * @return A copy containing the items of the `DynamicArray` within the range
+     * @throws IndexOutOfBoundsException for invalid indices
+     */
+    public DynamicArray<T> splitSuffix(int fromIndex) throws IndexOutOfBoundsException {
+        // Check index validity
+        if (indexInRange(fromIndex)) {
+            // Calls sublist()
+            DynamicArray<T> newDA = this.sublist(fromIndex, this.high);
+            return newDA;
+        }
+        else {
             throw new IndexOutOfBoundsException(indexErrorMessage);
         }
     }
