@@ -1,5 +1,3 @@
-import static org.junit.Assert.fail;
-
 /**
  * This Class is based on Java's built-in Array,
  * adds functionality to it, similar to that of Java ArrayLists
