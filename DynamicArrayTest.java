@@ -46,10 +46,10 @@ public class DynamicArrayTest {
      */
     public void compareToString(DynamicArray<Character> arr, String s) {
         // if (arr.length != s.length()) {
-        //     return ;
+        // return ;
         // }
         for (int i = 0; i < arr.size(); i++) {
-            System.out.println(arr.get(i).charValue() + " "+s.charAt(i));
+            System.out.println(arr.get(i).charValue() + " " + s.charAt(i));
             assertEquals("[" + s + "] Elements are equal at index " + i, arr.get(i).charValue(), s.charAt(i));
         }
     }
@@ -174,8 +174,8 @@ public class DynamicArrayTest {
     // */
     // @Test
     // public void testExtractZero() {
-    //     DynamicArray<Character> extractedA1 = a1.extract(0, 0);
-    //     compareToString(extractedA1, "abcdef");
+    // DynamicArray<Character> extractedA1 = a1.extract(0, 0);
+    // compareToString(extractedA1, "abcdef");
     // }
     //
     // /**
