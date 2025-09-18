@@ -416,7 +416,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         // Check index validity
         if (indexInRange(fromIndex)) {
             // Calls sublist()
-            DynamicArray<T> newDA = this.sublist(fromIndex, this.high);
+            DynamicArray<T> newDA = this.sublist(fromIndex, this.size());
             return newDA;
         }
         else {
