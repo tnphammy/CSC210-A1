@@ -26,7 +26,7 @@ public class RunTests {
         });
 
         // run the student’s test class
-        Result result = core.run(DynamicArrayTest.class);
+        Result result = core.run(DynamicArrayTests.class);
 
         System.out.println("\n====================");
         System.out.println("Summary:");
