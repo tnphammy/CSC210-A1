@@ -330,8 +330,9 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
     public DynamicArray<T> insert(int index, DynamicArray<T> newDA) throws IndexOutOfBoundsException {
         // Check index validity
         if (indexInRange(index)) {
+            int sizeOfBoth = this.size() + newDA.size();
             // 1. Create a fullDA with larger size to hold elements of both Dynamic Arrays
-            DynamicArray<T> fullDA = new DynamicArray<>(this.length + newDA.length);
+            DynamicArray<T> fullDA = new DynamicArray<>(sizeOfBoth);
             // 2. Copy all elements (from current `DynamicArray`) before the index into
             // fullDA
             for (int i = 0; i < index; i++) {
@@ -348,6 +349,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             }
             // 4. Return fullDA
             return fullDA;
+
         } else {
             throw new IndexOutOfBoundsException(indexErrorMessage);
         }
@@ -402,16 +404,17 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             throw new IllegalAccessException("Invalid start and end indeces.");
         }
         if (indexInRange(fromIndex) && toIndex <= this.length) {
-            int offset = fromIndex - toIndex;
+            int offset = toIndex - fromIndex;
             // 1. Create a newDA with smaller size
-            DynamicArray<T> newDA = new DynamicArray<>(this.length - (offset));
+            DynamicArray<T> newDA = new DynamicArray<>(this.size() - (offset));
             // 2. Copy all elements before fromIndex
             for (int i = this.low; i < fromIndex; i++) {
-                newDA.set(i, this.get(i));
+                newDA.add(this.get(i));
+                System.out.println("Added NewDA: " + newDA);
             }
             // 3. Copy all elements after toIndex
-            for (int i = fromIndex; i <= newDA.high; i++) {
-                newDA.set(i, this.get(i + offset));
+            for (int i = fromIndex; i < toIndex; i++) {
+                newDA.add(this.get(i + offset));
             }
             // 4. Return newDA
             return newDA;
