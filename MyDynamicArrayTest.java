@@ -8,7 +8,8 @@ public class MyDynamicArrayTest {
         a1.add(4, 'e');
         a1.add(5, 'f');
         System.out.println(a1);
-        a1.extract(0, 1);
+        DynamicArray<Character> extractedA1 = a1.extract(2, 4);
+        System.out.println("E0: " + extractedA1.get(0));
         // DynamicArray<Character> empty = new DynamicArray<Character>(0);
         // empty.get(0);
 

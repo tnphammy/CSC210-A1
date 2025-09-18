@@ -45,7 +45,11 @@ public class DynamicArrayTest {
      * against those in a string.
      */
     public void compareToString(DynamicArray<Character> arr, String s) {
+        // if (arr.length != s.length()) {
+        //     return ;
+        // }
         for (int i = 0; i < arr.size(); i++) {
+            System.out.println(arr.get(i).charValue() + " "+s.charAt(i));
             assertEquals("[" + s + "] Elements are equal at index " + i, arr.get(i).charValue(), s.charAt(i));
         }
     }
@@ -150,7 +154,7 @@ public class DynamicArrayTest {
     @Test
     public void testExtractStandard() {
         DynamicArray<Character> extractedA1 = a1.extract(2, 4);
-        compareToString(extractedA1, "abcdef");
+        compareToString(extractedA1, "cd");
     }
 
     //
@@ -160,7 +164,9 @@ public class DynamicArrayTest {
      */
     @Test
     public void testExtractEntire() {
-        compareToString(a1.extract(0, 6), "abcdef");
+        DynamicArray<Character> extractedA1 = a1.extract(1, 2);
+        System.out.println("Ea1: " + extractedA1);
+        compareToString(extractedA1, "abcdef");
 
     }
     //
