@@ -3,11 +3,15 @@
  * adds functionality to it, similar to that of Java ArrayLists
  */
 public class DynamicArray<T> implements DynamicArrayADT<T> {
-    /* ATTRIBUTES */
+    /** The length of the DynamicArray */
     int length;
+    /** The available storage within the DynamicArray */
     T[] storage;
+    /** The lowest accessible index within elements in the DynamicArray */
     int low; // lowest index
+    /** The highest accessible index within elements in the DynamicArray */
     int high; // highest index
+    /** Defaul Index Error Message */
     String indexErrorMessage = "Invalid index.";
 
     /* CONSTRUCTORS */
