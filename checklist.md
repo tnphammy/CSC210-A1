@@ -24,7 +24,7 @@ YES 1 pt: Group 2 method fully tested: add
 
 YES 1 pt: Group 2 methods correctly implemented
 
-PART 1 pts: Group 3 methods fully tested: append and extract
+YES 1 pts: Group 3 methods fully tested: append and extract
 
 YES 1 pts: Group 3 methods correctly implemented
 

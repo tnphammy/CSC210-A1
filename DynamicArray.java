@@ -369,6 +369,10 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         if (fromIndex > toIndex) {
             throw new IllegalArgumentException("Invalid start and end indeces.");
         }
+        if (fromIndex == toIndex) {
+            DynamicArray<T> subArray = new DynamicArray<>(0);
+            return subArray;
+        }
         if (indexInRange(fromIndex) && indexInRange(toIndex - 1)) {
             // Make a new subArray
             DynamicArray<T> subArray = new DynamicArray<>(toIndex - fromIndex);
@@ -433,6 +437,10 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         if (fromIndex > toIndex) {
             throw new IllegalArgumentException("Invalid start and end indeces.");
         }
+        if (fromIndex == toIndex) {
+            DynamicArray<T> subArray = new DynamicArray<>(toIndex - fromIndex);
+            return subArray;
+        }
         if (indexInRange(fromIndex) && toIndex <= this.length) {
             // 1. Make deep copy called newDA of original DA
             DynamicArray<T> newDA = new DynamicArray<>(this);
@@ -440,7 +448,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             DynamicArray<T> subArray = sublist(fromIndex, toIndex);
             // 3. Assign newDA to sublist
             newDA = subArray;
-            System.out.println(subArray);
+            System.out.println("newDA is: " + newDA);
             return newDA;
         } else {
             throw new IndexOutOfBoundsException(indexErrorMessage);

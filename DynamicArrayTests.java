@@ -45,9 +45,6 @@ public class DynamicArrayTests {
      * against those in a string.
      */
     public void compareToString(DynamicArray<Character> arr, String s) {
-        // if (arr.length != s.length()) {
-        // return ;
-        // }
         for (int i = 0; i < arr.size(); i++) {
             System.out.println(arr.get(i).charValue() + " " + s.charAt(i));
             assertEquals("[" + s + "] Elements are equal at index " + i, arr.get(i).charValue(), s.charAt(i));
@@ -168,23 +165,25 @@ public class DynamicArrayTests {
         compareToString(extractedA1, "abcdef");
 
     }
-    // //
-    // /**
-    // * Tests that ..
-    // */
-    // @Test
-    // public void testExtractZero() {
-    // DynamicArray<Character> extractedA1 = a1.extract(0, 0);
-    // compareToString(extractedA1, "abcdef");
-    // }
-    //
-    // /**
-    // * Tests that ..
-    // */
-    // @Test
-    // public void testExtractEmpty() {
-    // // fill in extracting from an empty array
-    // }
+
+    /**
+     * Tests that ..
+     */
+    @Test
+    public void testExtractZero() {
+        DynamicArray<Character> extractedA1 = a1.extract(6, 6);
+        compareToString(extractedA1, "");
+    }
+
+    /**
+     * Tests that ..
+     */
+    @Test
+    public void testExtractEmpty() {
+        DynamicArray<Character> emptyArray = empty.extract(0, 0);
+        compareToString(emptyArray, "");
+
+    }
 
     /**
      * Tests that extract throws the proper exception
@@ -192,15 +191,20 @@ public class DynamicArrayTests {
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testExtractBounds() {
-        DynamicArray<Character> extract = a1.extract(-1, 5);
-        // More bounds that you can check:
         // low index is negative => throws ArrayIndexOutOfBoundsException
-        // high index is greater than array length => throws
-        // ArrayIndexOutOfBoundsException
-        // low index is greater than array length => throws
-        // ArrayIndexOutOfBoundsException
+        a1.extract(-1, 5);
+        
+        // high index is greater than array length => throws ArrayIndexOutOfBoundsException
+        a1.extract(0, 7);
+
+        // low index is greater than array length => throws ArrayIndexOutOfBoundsException
+        a1.extract(7, 1);
+
         // high index is negative => throws ArrayIndexOutOfBoundsException
+        a1.extract(0, -1);
+
         // high index is less than low
+        a1.extract(3, 1);
     }
 
 }

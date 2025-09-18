@@ -2,9 +2,9 @@
 
 ## Your readme should include the following information. Each student needs to submit all of this information.
 
-Other students you worked with, including TAs: TA Jade Lilian
+Other students you worked with, including TAs: TA Jade Lilian, TA Marybella
 
-If anyone was particularly helpful, please give them a shoutout here: TA Jade Lilian
+If anyone was particularly helpful, please give them a shoutout here: TA Jade Lilian, TA Marybella - I owe everything to them 
 
 Any references or resources used besides JavaDoc and course materials: https://www.w3schools.com/java/java_ref_arraylist.asp
 
