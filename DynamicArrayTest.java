@@ -164,18 +164,18 @@ public class DynamicArrayTest {
      */
     @Test
     public void testExtractEntire() {
-        DynamicArray<Character> extractedA1 = a1.extract(1, 2);
-        System.out.println("Ea1: " + extractedA1);
+        DynamicArray<Character> extractedA1 = a1.extract(0, 6);
         compareToString(extractedA1, "abcdef");
 
     }
-    //
+    // //
     // /**
     // * Tests that ..
     // */
     // @Test
     // public void testExtractZero() {
-    // // fill in extracting zero elements
+    //     DynamicArray<Character> extractedA1 = a1.extract(0, 0);
+    //     compareToString(extractedA1, "abcdef");
     // }
     //
     // /**
