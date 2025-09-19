@@ -226,8 +226,6 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
                     this.set(i + 1, this.get(i));
                 }
                 high++; // Update highest index
-                System.out.println("High updated to: " + this.high);
-                System.out.println("Size updated to: " + this.size());
                 // Set the index's value to the item
                 this.set(index, item);
             }
@@ -328,24 +326,29 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @throws IndexOutOfBoundsException for invalid indices
      */
     public DynamicArray<T> insert(int index, DynamicArray<T> newDA) throws IndexOutOfBoundsException {
-        // Check index validity
-        if (indexInRange(index)) {
+        // Check index validity (allows index - 1 if attaching to the end)
+        if ((indexInRange(index - 1) && (index > 0)) || (indexInRange(index))) {
+            // Check if newDA is empty => Return deep copy of current DynamicArray 
+            if (newDA.size() == 0) {
+                DynamicArray<T> fullDA = new DynamicArray<>(this);
+                return fullDA;
+            }
             int sizeOfBoth = this.size() + newDA.size();
             // 1. Create a fullDA with larger size to hold elements of both Dynamic Arrays
             DynamicArray<T> fullDA = new DynamicArray<>(sizeOfBoth);
             // 2. Copy all elements (from current `DynamicArray`) before the index into
             // fullDA
             for (int i = 0; i < index; i++) {
-                fullDA.set(i, this.get(i));
+                fullDA.add(this.get(i));
+                
             }
             // 3. Copy all elements of newDA into fullDA
-            int offset = index;
-            for (int i = newDA.low; i <= newDA.high; i++) {
-                fullDA.set(i + offset, newDA.get(i));
+            for (int i = newDA.low; i < newDA.size(); i++) {
+                fullDA.add(newDA.get(i));
             }
             // 4. Copy all remaining elements (from current `DynamicArray`) into fullDA
             for (int i = index; i <= this.high; i++) {
-                fullDA.set(i + offset, newDA.get(i));
+                fullDA.add(this.get(i));
             }
             // 4. Return fullDA
             return fullDA;
@@ -396,7 +399,7 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      */
     public DynamicArray<T> splitPrefix(int toIndex) throws IndexOutOfBoundsException {
         // Check index validity
-        if (indexInRange(toIndex)) {
+        if (toIndex <= this.length) {
             // Calls sublist()
             DynamicArray<T> newDA = this.sublist(0, toIndex);
             return newDA;
@@ -414,7 +417,8 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      */
     public DynamicArray<T> splitSuffix(int fromIndex) throws IndexOutOfBoundsException {
         // Check index validity
-        if (indexInRange(fromIndex)) {
+        
+        if (indexInRange(fromIndex - 1)) {
             // Calls sublist()
             DynamicArray<T> newDA = this.sublist(fromIndex, this.size());
             return newDA;
@@ -439,6 +443,11 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
         if (fromIndex > toIndex) {
             throw new IllegalArgumentException("Invalid start and end indeces.");
         }
+        // If trying to delete nothing => Return a deep copy of the current DynamicArray
+        if (fromIndex == toIndex) {
+            DynamicArray<T> sameArray = new DynamicArray<>(this);
+            return sameArray;
+        }
         if (indexInRange(fromIndex) && toIndex <= this.length) {
             int offset = toIndex - fromIndex;
             // 1. Create a newDA with smaller size
@@ -446,11 +455,10 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
             // 2. Copy all elements before fromIndex
             for (int i = this.low; i < fromIndex; i++) {
                 newDA.add(this.get(i));
-                System.out.println("Added NewDA: " + newDA);
             }
             // 3. Copy all elements after toIndex
-            for (int i = fromIndex; i < toIndex; i++) {
-                newDA.add(this.get(i + offset));
+            for (int i = toIndex; i < this.size(); i++) {
+                newDA.add(this.get(i));
             }
             // 4. Return newDA
             return newDA;

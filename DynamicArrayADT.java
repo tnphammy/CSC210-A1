@@ -116,5 +116,5 @@ public interface DynamicArrayADT<T> {
      * @throws IndexOutOfBoundsException for invalid indices
      * @throws IllegalArgumentException if the starting index is larger than the ending index
      */
-    public DynamicArray<T> extract(int fromIndex, int toIndex) throws IndexOutOfBoundsException, IllegalAccessException;
+    public DynamicArray<T> extract(int fromIndex, int toIndex) throws IndexOutOfBoundsException, IllegalArgumentException;
 }

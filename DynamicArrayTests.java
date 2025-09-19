@@ -98,13 +98,106 @@ public class DynamicArrayTests {
         a1.add(6, 'z');
     }
 
+    // ~*~*~*~*~ Insert Tests Below ~*~*~*~*~
+    /**
+     * Tests that inserting an empty DynamicArray into another results in
+     * a new DynamicArray that is the same as the non-empty one
+     */
+    @Test
+    public void testInsertEmpty() {
+        compareToString(a1.insert(0, empty), "abcdef");
+    }
+
+    /**
+     * Tests that inserting a non-empty array into itself
+     * will result in a new array twice as long, with one part being the full
+     * original array
+     * and on either side, the elements corresponding to where the index was
+     * specified
+     */
+    @Test
+    public void testInsertSelf() {
+        compareToString(a1.insert(0, a1), "abcdefabcdef");
+    }
+    
+    /**
+     * Tests that inserting an array at internal index (not lowIndex or highIndex)
+     * results in a new array which contains the original array with
+     * the inserted array at the correct placement
+     */
+    @Test
+    public void testInsertMiddle() {
+        compareToString(a1.insert(3, s), "abcsdef");
+    }
+
+    /**
+     * Tests that inserting an array to the end of an array
+     * would create an array with the original array,
+     * with the new array attached right after it
+     */
+    @Test
+    public void testInsertEnd() {
+        compareToString(a1.insert(6, a1), "abcdefabcdef");
+    }
+
     // ~*~*~*~*~ Delete Tests Below ~*~*~*~*~
+    /**
+     * Tests that deleting from a higher to a lower index throws the right exception
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testDeleteBounds() {
-        a1.delete(4,2);
+        // fromIndex is larger than toIndex
+        a1.delete(4, 2);
+        // toIndex is negative
+        a1.delete(0, -2);
     }
-    // ~*~*~*~*~ Append Tests Below ~*~*~*~*~
 
+    /**
+     * Tests that deleting from the lowest index to the length
+     * results in an empty array
+     */
+    @Test
+    public void testDeleteEntire() {
+        compareToString(a1.delete(0, 6), "");
+    }
+
+    /**
+     * Tests that deleting with the final index and length
+     * will result in the original array missing the final element
+     */
+    @Test
+    public void testDeleteEnd() {
+        compareToString(a1.delete(5, 6), "abcde");
+    }
+
+    /**
+     * Tests that deleting to and from the same index deletes nothing
+     * and returns a new array identical to the original array
+     */
+    @Test
+    public void testDeleteZero() {
+        compareToString(a1.delete(6, 6), "abcdef");
+    }
+
+    // ~*~*~*~*~ Split Tests Below ~*~*~*~*~
+    /**
+     * Tests that spliting up until the end of an array results in the entire array
+     */
+    @Test
+    public void testSplitPrefixAtEnd() {
+        compareToString(a1.splitPrefix(6), "abcdef");
+    }
+
+    /**
+     * Tests that splitting suffix from the end returns an empty array
+     */
+    @Test
+    public void testSplitSuffixAtEnd() {
+        compareSize(a1.splitSuffix(6), "");
+    }
+
+    // ~*~*~*~*~ Append Tests Below ~*~*~*~*~
+    
     /**
      * Tests that appending two non-empty arrays results in
      * a new array containing the elements of both, in order.
@@ -173,7 +266,7 @@ public class DynamicArrayTests {
     }
 
     /**
-     * Tests that ..
+     * Tests that extracting from and to the same index gets an empty array
      */
     @Test
     public void testExtractZero() {
@@ -193,17 +286,28 @@ public class DynamicArrayTests {
 
     /**
      * Tests that extract throws the proper exception
+     * when called on a toIndex that is higher than the fromIndex
+     */
+    @Test (expected = IllegalArgumentException.class)
+    public void testExtractInvalid() {
+        a1.extract(8, 0);
+    }
+
+    /**
+     * Tests that extract throws the proper exception
      * when called on invalid indices
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testExtractBounds() {
         // low index is negative => throws ArrayIndexOutOfBoundsException
         a1.extract(-1, 5);
-        
-        // high index is greater than array length => throws ArrayIndexOutOfBoundsException
+
+        // high index is greater than array length => throws
+        // ArrayIndexOutOfBoundsException
         a1.extract(0, 7);
 
-        // low index is greater than array length => throws ArrayIndexOutOfBoundsException
+        // low index is greater than array length => throws
+        // ArrayIndexOutOfBoundsException
         a1.extract(7, 1);
 
         // high index is negative => throws ArrayIndexOutOfBoundsException
