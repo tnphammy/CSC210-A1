@@ -431,13 +431,13 @@ public class DynamicArray<T> implements DynamicArrayADT<T> {
      * @param toIndex   The ending index (Exclusive)
      * @return A copy of the resulting Dynamic Array
      * @throws IndexOutOfBoundsException for invalid indices
-     * @throws IllegalAccessException    if the starting index is larger than the
+     * @throws IllegalArgumentException    if the starting index is larger than the
      *                                   ending index
      */
-    public DynamicArray<T> delete(int fromIndex, int toIndex) throws IndexOutOfBoundsException, IllegalAccessException {
+    public DynamicArray<T> delete(int fromIndex, int toIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
         // Check index validity
         if (fromIndex > toIndex) {
-            throw new IllegalAccessException("Invalid start and end indeces.");
+            throw new IllegalArgumentException("Invalid start and end indeces.");
         }
         if (indexInRange(fromIndex) && toIndex <= this.length) {
             int offset = toIndex - fromIndex;

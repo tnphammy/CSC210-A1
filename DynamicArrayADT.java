@@ -104,9 +104,9 @@ public interface DynamicArrayADT<T> {
      * @param toIndex The ending index (Exclusive)
      * @return A copy of the resulting Dynamic Array 
      * @throws IndexOutOfBoundsException for invalid indices
-     * @throws IllegalAccessException if the starting index is larger than the ending index
+     * @throws IllegalArgumentException if the starting index is larger than the ending index
      */
-    public DynamicArray<T> delete(int fromIndex, int toIndex) throws IndexOutOfBoundsException, IllegalAccessException;
+    public DynamicArray<T> delete(int fromIndex, int toIndex) throws IndexOutOfBoundsException, IllegalArgumentException;
 
     /**
      * Creates a new Dynamic Array from the ç in a specified range
@@ -114,7 +114,7 @@ public interface DynamicArrayADT<T> {
      * @param toIndex The ending index (Exclusive)
      * @return A new Dynamic Array containing the items from the specified range
      * @throws IndexOutOfBoundsException for invalid indices
-     * @throws IllegalAccessException if the starting index is larger than the ending index
+     * @throws IllegalArgumentException if the starting index is larger than the ending index
      */
     public DynamicArray<T> extract(int fromIndex, int toIndex) throws IndexOutOfBoundsException, IllegalAccessException;
 }

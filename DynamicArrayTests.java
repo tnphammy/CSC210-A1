@@ -97,6 +97,12 @@ public class DynamicArrayTests {
     public void testAddBounds() {
         a1.add(6, 'z');
     }
+
+    // ~*~*~*~*~ Delete Tests Below ~*~*~*~*~
+    @Test(expected = IllegalArgumentException.class)
+    public void testDeleteBounds() {
+        a1.delete(4,2);
+    }
     // ~*~*~*~*~ Append Tests Below ~*~*~*~*~
 
     /**
