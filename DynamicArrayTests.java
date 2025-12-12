@@ -87,7 +87,7 @@ public class DynamicArrayTests {
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetLowerBounds() {
-        empty.get(0);
+        empty.get(-1);
     }
 
     /**
