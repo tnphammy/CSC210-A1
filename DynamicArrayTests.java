@@ -62,11 +62,41 @@ public class DynamicArrayTests {
     }
 
     /**
+     * Tests that the method gets the character at the DA boundaries correctly
+     */
+    @Test
+    public void testGetBoundaries() {
+        // first character
+        Character firstChar = (Character) a1.get(0);
+        assertEquals("a", String.valueOf(firstChar));
+        // last character
+        Character lastChar = (Character) a1.get((a1.size() - 1));
+        assertEquals("f", String.valueOf(lastChar));
+    }
+
+    /**
+     * Tests that getting one element from an empty array throws an exception
+     */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGetEmpty() {
+        empty.get(0);
+    }
+
+    /**
      * Tests that getting an inaccessible element throws an Exception
      */
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testGetBounds() {
+    public void testGetLowerBounds() {
         empty.get(0);
+    }
+
+    /**
+     * Tests that getting an inaccessible element throws an Exception
+     */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGetUpperBounds() {
+        a1.get(6);
+
     }
 
     // ~*~*~*~*~ Add Tests Below ~*~*~*~*~
@@ -90,11 +120,20 @@ public class DynamicArrayTests {
     }
 
     /**
+     * Tests that adding an item with a negative index throws an error
+     */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testNegativeIndexAdd() {
+        a1.add(-1, 'z');
+    }
+
+    /**
      * Tests that the adding an item to an index that
      * isn't accessible throws the corresponding error
      */
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testAddBounds() {
+    public void testAddOutOfBounds() {
+        // get upper bounds to throw error
         a1.add(6, 'z');
     }
 
@@ -178,6 +217,31 @@ public class DynamicArrayTests {
     public void testDeleteZero() {
         compareToString(a1.delete(6, 6), "abcdef");
     }
+
+    /** 
+     * Checks that deleting an element outside of the DA throws an exception
+     */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testDeleteLowerBounds() {
+        a1.delete(-1, 0);
+    }
+
+    /** 
+     * Checks that deleting an element outside of the DA throws an exception
+     */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testDeleteUpperBounds() {
+        a1.delete(6, 7);
+    }
+
+    /** 
+     * Checks that deleting an element from an empty DA throws an exception
+     */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testDeleteEmpty() {
+        empty.delete(0, 1);
+    }
+
 
     // ~*~*~*~*~ Split Tests Below ~*~*~*~*~
     /**
